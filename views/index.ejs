@@ -1,0 +1,76 @@
+<%- include ('./part/header.ejs') %>
+
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-sm-5 mt-5">
+                <h2 class="alert alert-primary text-center">Add Student</h2>
+                <form method="post">
+                    <div class=" mb-3 ">
+                        <label for="name " class="form-label fw-bold mt-2">Name</label>
+                        <input type=text class=form-control id=name name=name>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="age " class="form-label fw-bold">age</label>
+                        <input type=number class=form-control id=age name=age>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="city " class="form-label fw-bold ">city</label>
+                        <input type=text class=form-control id=city name=city>
+                    </div>
+                    <div class="mb-3 ">
+                        <button type="submit " class="btn bg-success mt-2 text-light p-2 w-100 ">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6 mt-5 " style="margin-left: 50px; ">
+                <h2 class="alert alert-danger text-center ">List Of Student</h2>
+                <%# show All Data %>
+                    <table class="table table-hover ">
+                        <thead class="bg-secondary bg-opacity-50">
+                            <tr>
+                                <th scope="col ">No</th>
+                                <th scope="col ">Name</th>
+                                <th scope="col ">Age</th>
+                                <th scope="col ">city</th>
+                                <th scope="col ">Edit</th>
+                                <th scope="col ">Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% var i=1 %>
+                                <% data.forEach((item)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= i++ %>
+                                        </td>
+                                        <td>
+                                            <%= item.name %>
+                                        </td>
+                                        <td>
+                                            <%= item.age %>
+                                        </td>
+                                        <td>
+                                            <%= item.city %>
+                                        </td>
+                                        <td>
+                                            <form action="/student/edit/<%= item._id %>" method="get">
+                                                <button class="btn bg-primary bg-opacity-75 text-light p-1">Edit</button>
+
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="/student/delete/<%= item._id %>" method="post">
+                                                <button class="btn bg-danger  text-light p-1">delete</button>
+
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                        </tbody>
+
+                    </table>
+            </div>
+        </div>
+    </div>
+    <%- include ('./part/footer.ejs') %>
